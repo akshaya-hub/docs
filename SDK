@@ -1,0 +1,48 @@
+
+
+The .NET Octokit SDK is a library that provides a set of classes and methods to interact with the GitHub API using the .NET framework. This library provides an easy-to-use interface for interacting with GitHub, allowing you to create, read, update, and delete resources on GitHub.
+
+Here are the steps to use the .NET Octokit SDK:
+
+Install the Octokit SDK
+You can install the Octokit SDK using the NuGet package manager. Open Visual Studio, navigate to your project, right-click on the project, and select "Manage NuGet Packages." In the NuGet Package Manager, search for "Octokit" and click "Install."
+
+Create an instance of the GitHubClient
+After installing the Octokit SDK, create an instance of the GitHubClient class to interact with the GitHub API. To do this, use your GitHub username and a personal access token or an OAuth token.
+
+csharp
+
+var github = new GitHubClient(new ProductHeaderValue("MyAppName"));
+github.Credentials = new Credentials("mytoken");
+You can generate a personal access token by going to your GitHub account settings, selecting "Developer settings," and then selecting "Personal access tokens." You can create an OAuth token by going to the GitHub API OAuth documentation and following the instructions.
+
+Use the GitHubClient to interact with the GitHub API
+Once you have created an instance of the GitHubClient, you can use it to interact with the GitHub API. Here are some examples of how to use the GitHubClient:
+
+csharp
+
+// Get the authenticated user
+var user = await github.User.Current();
+
+// Get a list of repositories
+var repositories = await github.Repository.GetAllForCurrent();
+
+// Create a new repository
+var newRepo = new NewRepository("MyNewRepo");
+var createdRepo = await github.Repository.Create(newRepo);
+The Octokit SDK provides many more methods for interacting with the GitHub API. You can find more information on the Octokit SDK documentation page.
+
+Handle exceptions
+It is essential to handle exceptions when working with the GitHub API. The Octokit SDK throws exceptions when errors occur. To handle exceptions, use try-catch blocks.
+
+csharp
+
+try
+{
+    var user = await github.User.Current();
+}
+catch (ApiException e)
+{
+    Console.WriteLine($"Error occurred: {e.Message}");
+}
+In the catch block, you can handle the exception and display an error message to the user.
